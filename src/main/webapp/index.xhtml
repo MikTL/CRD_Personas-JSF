@@ -4,44 +4,57 @@
 	xmlns:f="http://java.sun.com/jsf/core">
 	<h:head>
 		<title>Personas</title>
+		<link rel="stylesheet" type="text/css" href="../static/styles.css"></link>
 	</h:head>
 	<h:body>
-		<h1>Crud de Personas</h1>
+		<h1>CRD de Personas</h1>
 		<h:form>
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="3">
+			
 				<h:outputLabel value="Nombres"/>
-				<h:inputText value="#{personaBean.persona.nombre}"/>
+				<h:inputText id="txtNombre" value="#{personaBean.persona2.nombre}" required="true" label="->"/>
+				<h:message for="txtNombre"></h:message>
+				
+				
 				<h:outputLabel value="Apellidos"/>
-				<h:inputText value="#{personaBean.persona.apellido}"/>
+				<h:inputText id="txtApellido" value="#{personaBean.persona2.apellido}" label="->" required="true"></h:inputText>
+				<h:message for="txtApellido"></h:message>
+				
 				<h:outputLabel value="Sexo"/>
-				<h:selectOneMenu value="#{personaBean.persona.sexo}">
+				<h:selectOneMenu id="sexo" value="#{personaBean.persona2.sexo}" required="true" label="->">
+					<f:selectItem itemLabel="Seleccione"></f:selectItem>
 					<f:selectItem itemValue="M" itemLabel="Masculino"/>
 					<f:selectItem itemValue="F" itemLabel="Femenino"/>
 				</h:selectOneMenu>
+				<h:message for="sexo"></h:message>
 			</h:panelGrid>
 			<h:commandButton value="Agregar" actionListener="#{personaBean.agregarPersona}"></h:commandButton>
+			<hr/>
 			
-			<h:dataTable value="#{personaBean.lstPersona}" var="per" rendered="#{personaBean.lstPersona.size() > 0}">
+			<h:dataTable class="table_2" value="#{personaBean.lstPersona}" var="per" rendered="#{personaBean.lstPersona.size() > 0}">
 			<h:column>
 				<f:facet name="header">
-					<h:outputLabel value="Nombres"></h:outputLabel>
+					<h:outputLabel value="NOMBRES"></h:outputLabel>
 				</f:facet>
 				<h:outputLabel value="#{per.nombre}"></h:outputLabel>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputLabel value="Apellidos"></h:outputLabel>
+					<h:outputLabel value="APELLIDOS"></h:outputLabel>
 				</f:facet>
 				<h:outputLabel value="#{per.apellido}"></h:outputLabel>
 			</h:column>
 			<h:column>
 				<f:facet name="header">
-					<h:outputLabel value="Sexo"></h:outputLabel>
+					<h:outputLabel value="SEXO"></h:outputLabel>
 				</f:facet>
 				<h:outputLabel value="#{per.sexo}"></h:outputLabel>
 			</h:column>
 			<h:column>
-				<h:commandLink value="Eliminar" actionListener="#{personaBean.eliminarPersona(per)}"/>
+			<f:facet name="header">
+					<h:outputLabel value="ACCIÓN"></h:outputLabel>
+				</f:facet>
+				<h:commandLink value="Eliminar" actionListener="#{personaBean.eliminarPersona(per)}" immediate="true"/>
 			</h:column>
 		</h:dataTable>
 		</h:form>
