@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h ="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<h:head>
+		<title>Personas</title>
+	</h:head>
+	<h:body>
+		<h1>Crud de Personas</h1>
+		<h:form>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nombres"/>
+				<h:inputText value="#{personaBean.persona.nombre}"/>
+				<h:outputLabel value="Apellidos"/>
+				<h:inputText value="#{personaBean.persona.apellido}"/>
+				<h:outputLabel value="Sexo"/>
+				<h:selectOneMenu value="#{personaBean.persona.sexo}">
+					<f:selectItem itemValue="M" itemLabel="Masculino"/>
+					<f:selectItem itemValue="F" itemLabel="Femenino"/>
+				</h:selectOneMenu>
+			</h:panelGrid>
+			<h:commandButton value="Agregar" actionListener="#{personaBean.agregarPersona}"></h:commandButton>
+			
+			<h:dataTable value="#{personaBean.lstPersona}" var="per" rendered="#{personaBean.lstPersona.size() > 0}">
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Nombres"></h:outputLabel>
+				</f:facet>
+				<h:outputLabel value="#{per.nombre}"></h:outputLabel>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Apellidos"></h:outputLabel>
+				</f:facet>
+				<h:outputLabel value="#{per.apellido}"></h:outputLabel>
+			</h:column>
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Sexo"></h:outputLabel>
+				</f:facet>
+				<h:outputLabel value="#{per.sexo}"></h:outputLabel>
+			</h:column>
+			<h:column>
+				<h:commandLink value="Eliminar" actionListener="#{personaBean.eliminarPersona(per)}"/>
+			</h:column>
+		</h:dataTable>
+		</h:form>
+	</h:body>
+</html>
